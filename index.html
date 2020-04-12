@@ -99,9 +99,14 @@
             <span class="section-heading">Upcoming Events</span>
             <h2><a href="#">We must walk in the middle of the road.</a></h2>
             <div class="events-meta">
-              <span class="mr-2"><span class="ion-clock mr-2"></span>Saturday 03/09/2018 09:30 AM</span>
-              <span class="mr-2"><span class="ion-location mr-2"></span>St. Petersburg, US</span>
-              <span class="mr-2"><span class="ion-person mr-2"></span>Pastor Luis Matthew</span>
+              <script>
+                var now = new Date();
+                var nextSunday = now.getNextWeekDay(0);
+                document.getElementById('nextSundayText').innerHTML = nextSunday;
+              </script>
+              <span class="mr-2"><span class="ion-clock mr-2"></span id = "nextSundayText"></span>
+              <span class="mr-2"><span class="ion-location mr-2"></span>Metuchen, New Jersey</span>
+              <span class="mr-2"><span class="ion-person mr-2"></span>Pastor Moses Pandian</span>
             </div>
           </div>
           <div class="col-md-6 element-animate">
@@ -121,18 +126,18 @@
           
           <ul class="worship-time-list mb-5">
             <li>
-              <a href="#">Morning Worship
-              <span>5:30AM - 6:00AM</span>
+              <a>Sunday Worship
+              <span>5:30PM - 7:30AM</span>
               </a>
             </li>
             <li>
-              <a href="#">Afternoon Worship
-              <span>1:30PM - 2:00PM</span>
+              <a>Saturday Fellowship and Prayer
+              <span>Third Saturday of Every Month</span>
               </a>
             </li>
             <li>
-              <a href="#">Evening Worship
-              <span>7:30PM - 8:00PM</span>
+              <a>Parsippany Worship
+              <span>Every Other Saturday</span>
               </a>
             </li>
           </ul>
