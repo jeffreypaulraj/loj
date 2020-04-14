@@ -61,15 +61,20 @@
       </nav>
     </header>
     <!-- END header -->
-    
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-database.js"></script>
+
     <section class="home-slider owl-carousel">
-      
+    
       <div class="slider-item" style="background-image: url('img/slider-2.jpg');">
         <div class="container">
           <div class="row slider-text align-items-center justify-content-center">
             <div class="col-md-8 text-center col-sm-12 element-animate">
-              <h1>Who We Are</h1>
-              <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus, soluta sit quam minima expedita atque corrupti reiciendis.</p>
+              <h1>Sermons</h1>
+              <p class="mb-5">A collection of powerful, Scripture-based sermons delivered at LOJ Church by Pastor Moses Pandian</p>
             </div>
           </div>
         </div>
@@ -83,153 +88,51 @@
       <div class="container">
         <div class="row mb-5 justify-content-center">
           <div class="col-md-12">
-            <span class="section-heading">History</span>
-            <h2>Our History</h2>
+            <h2>Our Sermons</h2>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
-            <p>Our church was founded in 2004 by Pastor Moses Pandian, with only a few families in attendance. Since then, our ministries and congregation have sizeable increased according to God's grace! Today, we hold services in Metuchen and Parsippany, and provide aid for four ministries in India</p>
-          </div>
-          <div class="col-md-6">            
-          </div>
-        </div>
-        <div class="row">
-        </div>
-      </div>
-    </section>
-    <!-- END section -->
-
-    <section class="section pt-md-5 pb-md-5 element-animate">
-      <div class="container">
-        <div class="row mb-5 justify-content-center">
-          <div class="col-md-12">
-            <span class="section-heading">Vision</span>
-            <h2>Our Vision</h2>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <h2 class="mb-4">"Give unto the Lord the glory due unto his name; worship the Lord in the beauty of holiness" &mdash; Psalms 29:2</h2>
-            <p>God is love.We proclaim God's love to each and every one through the Gospel of Jesus Christ who gave His life for the sinners to be saved.</p>
-          </div>
-          <div class="col-md-6">            
-          </div>
-        </div>
-        <div class="row">
-        </div>
-      </div>
-    </section>
-
-    <section class="section pt-md-5 pb-md-5 element-animate">
-      <div class="container">
-        <div class="row mb-5 justify-content-center">
-          <div class="col-md-12">
-            <span class="section-heading">Beliefs</span>
-            <h2>Our Beliefs</h2>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <p>We believe in one God, eternally existing in three persons: Father, Son and Holy Spirit</p>
-            <p>We believe that Jesus Christ was begotten by the Holy Spirit, born of the Virgin Mary, and is true God and true Man</p>
-            <p>We believe that man was created in the image of God; that he sinned, and thereby incurred not only physical death, but also spiritual death which is separation from God; and that all human beings are born with a sinful nature, and in the case of those who reach moral responsibility, become sinners in thought, word and deed</p>
-            <p>We believe that the Lord Jesus Christ died for our sins, according to the Scriptures, as a representative and substitutionary sacrifice; and that all who believe in Him are justified on the ground of His shed blood</p>
-            <p>We believe in one baptism in the name of the Lord Jesus Christ, the Father and the Holy Spirit</p>
-            <p>We believe in the resurrection of the crucified body of our Lord, and His ascension into Heaven, and His present life there for us, as High Priest and Advocate</p>
-            <p>We believe in the fact that there will be a personal return of our Lord and Savior Jesus Christ</p>
-            <p>We believe that all those who receive the Lord Jesus Christ by faith as their Lord and Saviour are born again of the Holy Spirit, and thereby become children of God</p>
-            <p>We believe that those who have been born again have everlasting life and shall not come into condemnation but are passed from death unto life; and that the Lord Jesus Christ gives unto them eternal life and they shall never perish, neither shall any man pluck them out of God’s hand</p>
-            <p>We believe in the bodily resurrection of the just and unjust, the everlasting blessedness of the saved, and the everlasting punishment of the lost.</p>
-          </div>
-          <div class="col-md-6">
-            <p><img src="img/founder.jpg" alt="Image placeholder" class="img-fluid"></p>
+          <div class="col-md-6" id = "sermonSection">
+            <script>
+                // Your web app's Firebase configuration
+                var firebaseConfig = {
+                  apiKey: "AIzaSyAJ_gCI1EYNAQGN0rjgVEDUrDoJvb_CYoA",
+                  authDomain: "lojchurch-2499d.firebaseapp.com",
+                  databaseURL: "https://lojchurch-2499d.firebaseio.com",
+                  projectId: "lojchurch-2499d",
+                  storageBucket: "lojchurch-2499d.appspot.com",
+                  messagingSenderId: "91846960778",
+                  appId: "1:91846960778:web:37032ad3d08bd5bf452f73"
+                };
+                // Initialize Firebase
+                firebase.initializeApp(firebaseConfig);
             
-          </div>
-        </div>
-        <div class="row">
-        </div>
-      </div>
-    </section>
+                var sermonsNameList = [];
+                var sermonsDatesList = [];
+                var sermonsLinksList = [];
+                firebase.database().ref('/Sermons').once('value', function(snapshot) {
+                  snapshot.forEach(function(childSnapshot){
+                    var sermonKey = childSnapshot.key;
+                    var sermonData = childSnapshot.val();
+                    sermonsNameList.push(sermonData['Title']);
+                    sermonsDatesList.push(sermonData['Date']);
+                    sermonsLinksList.push(sermonData['Link']);
 
-    <section class="section">
-      <div class="container">
-        <div class="row mb-5 justify-content-center element-animate">
-          <div class="col-md-12">
-            <span class="section-heading">Pastors</span>
-            <h2>Meet Our Pastors</h2>
-          </div>
-        </div>
-            <div class="media pastor d-block text-center">
-              <img src="img/pastor_2.jpg" alt="Image placeholder" class="img-fluid mb-4">
-              <div class="media-body">
-                <h3>Moses Pandian</h3>
-                <p>Pastor Moses has led our church since its founding in 2004. He h</p>
-                <p><a href="#" class="btn btn-primary">Read Bio</a></p>
-              </div>
-          
-        </div>
-      </div>
-    </section>
-
-    <section class="section pt-5 pb-2">
-      <div class="container">
-        <div class="row mb-5 justify-content-center element-animate">
-          <div class="col-md-12">
-            <span class="section-heading">Recent Sermons</span>
-            <h2>Listen Our Sermons</h2>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12 col-sm-6 col-lg-4 mb-5">
-            
-            <div class="sermon element-animate">
-              <div class="sermon-text">
-            <h2><a href="#">Arise, Shine</a></h2>
-            <p class="sermon-meta">by <a href="#">Luis Matthew</a> on March 28, 2018</p>
-            </div>
-            <div class="player">
-                <audio id="player2" preload="none" controls style="max-width: 100%">
-                    <source src="http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3" type="audio/mp3">
-                </audio>
-            </div>
-            </div>
-
-          </div>
-          <div class="col-12 col-sm-6 col-lg-4 mb-5">
-            
-            <div class="sermon element-animate">
-              <div class="sermon-text">
-            <h2><a href="#">Filled in Him</a></h2>
-            <p class="sermon-meta">by <a href="#">Luis Matthew</a> on March 28, 2018</p>
-            </div>
-            <div class="player">
-                <audio id="player3" preload="none" controls style="max-width: 100%">
-                    <source src="http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3" type="audio/mp3">
-                </audio>
-            </div>
-            </div>
-
-          </div>
-          <div class="col-12 col-sm-6 col-lg-4 mb-5">
-            
-            <div class="sermon element-animate">
-              <div class="sermon-text">
-            <h2><a href="#">Jehovah the Creator</a></h2>
-            <p class="sermon-meta">by <a href="#">Luis Matthew</a> on March 28, 2018</p>
-            </div>
-            <div class="player">
-                <audio id="player4" preload="none" controls style="max-width: 100%">
-                    <source src="http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3" type="audio/mp3">
-                </audio>
-            </div>
-            </div>
-
+                    var titleText = document.createElement("a");
+                    titleText.innerHTML = sermonData['Title'];
+                    titleText.href = sermonData['Link'];
+                    var dateText = document.createElement("p");
+                    dateText.innerHTML = sermonData['Date'];
+                    document.getElementById("sermonSection").appendChild(titleText);
+                    document.getElementById("sermonSection").appendChild(dateText);
+                  })
+                })
+        
+              </script>
           </div>
         </div>
       </div>
     </section>
-
     <!-- END section -->
     
     
