@@ -66,42 +66,9 @@
 
   <!-- TODO: Add SDKs for Firebase products that you want to use
        https://firebase.google.com/docs/web/setup#available-libraries -->
-
-  <script>
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-      apiKey: "AIzaSyAJ_gCI1EYNAQGN0rjgVEDUrDoJvb_CYoA",
-      authDomain: "lojchurch-2499d.firebaseapp.com",
-      databaseURL: "https://lojchurch-2499d.firebaseio.com",
-      projectId: "lojchurch-2499d",
-      storageBucket: "lojchurch-2499d.appspot.com",
-      messagingSenderId: "91846960778",
-      appId: "1:91846960778:web:37032ad3d08bd5bf452f73"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-
-    var sermonsNameList = [];
-    var sermonsDatesList = [];
-    firebase.database.ref('/Sermons').once('value', function(snapshot) {
-      snapshot.forEach(function(childSnapshot){
-        var sermonData = childSnapshot.val;
-        sermonsNameList.push(sermonData['Title']);
-        sermonsDatesList.push(sermonData['Date']);
-      })
-    })
-
-    document.getElementById("SermonOneTitle").innerHTML = sermonsNameList[0];
-    document.getElementById("SermonTwoTitle").innerHTML = sermonsNameList[1];
-    document.getElementById("SermonThreeTitle").innerHTML = sermonsNameList[2];
-
-    document.getElementById("SermonOneDate").innerHTML = sermonsDatesList[0];
-    document.getElementById("SermonTwoDate").innerHTML = sermonsDatesList[1];
-    document.getElementById("SermonThreeDate").innerHTML = sermonsDatesList[2];
+  <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-database.js"></script>
 
 
-
-  </script>
     <section class="home-slider owl-carousel">
       
       <div class="slider-item" style="background-image: url('img/slider-1.jpg');">
@@ -317,6 +284,51 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
       </div>
     </footer>
     <!-- END footer -->
+    
+    
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyAJ_gCI1EYNAQGN0rjgVEDUrDoJvb_CYoA",
+        authDomain: "lojchurch-2499d.firebaseapp.com",
+        databaseURL: "https://lojchurch-2499d.firebaseio.com",
+        projectId: "lojchurch-2499d",
+        storageBucket: "lojchurch-2499d.appspot.com",
+        messagingSenderId: "91846960778",
+        appId: "1:91846960778:web:37032ad3d08bd5bf452f73"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+  
+      var sermonsNameList = [];
+      var sermonsDatesList = [];
+      var sermonsLinksList = [];
+      firebase.database().ref('/Sermons').once('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot){
+          var sermonKey = childSnapshot.key;
+          var sermonData = childSnapshot.val();
+          sermonsNameList.push(sermonData['Title']);
+          sermonsDatesList.push(sermonData['Date']);
+          sermonsLinksList.push(sermonData['Link']);
+          document.getElementById("SermonOneTitle").innerHTML = sermonsNameList[0];
+          document.getElementById("SermonTwoTitle").innerHTML = sermonsNameList[1];
+          document.getElementById("SermonThreeTitle").innerHTML = sermonsNameList[2];
+  
+          document.getElementById("SermonOneDate").innerHTML = sermonsDatesList[0];
+          document.getElementById("SermonTwoDate").innerHTML = sermonsDatesList[1];
+          document.getElementById("SermonThreeDate").innerHTML = sermonsDatesList[2];
+
+          document.getElementById("SermonOneTitle").href = sermonsLinksList[0];
+          document.getElementById("SermonTwoTitle").href = sermonsLinksList[1];
+          document.getElementById("SermonThreeTitle").href = sermonsLinksList[2];
+        })
+      })
+  
+  
+  
+  
+    </script>
+
 
     <!-- loader -->
     <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#f4b214"/></svg></div>
