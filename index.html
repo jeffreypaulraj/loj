@@ -61,15 +61,55 @@
       </nav>
     </header>
     <!-- END header -->
-    
+      <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyAJ_gCI1EYNAQGN0rjgVEDUrDoJvb_CYoA",
+      authDomain: "lojchurch-2499d.firebaseapp.com",
+      databaseURL: "https://lojchurch-2499d.firebaseio.com",
+      projectId: "lojchurch-2499d",
+      storageBucket: "lojchurch-2499d.appspot.com",
+      messagingSenderId: "91846960778",
+      appId: "1:91846960778:web:37032ad3d08bd5bf452f73"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    var sermonsNameList = [];
+    var sermonsDatesList = [];
+    firebase.database.ref('/Sermons').once('value', function(snapshot) {
+      snapshot.forEach(function(childSnapshot){
+        var sermonData = childSnapshot.val;
+        sermonsNameList.push(sermonData['Title']);
+        sermonsDatesList.push(sermonData['Date']);
+      })
+    })
+
+    document.getElementById("SermonOneTitle").innerHTML = sermonsNameList[0];
+    document.getElementById("SermonTwoTitle").innerHTML = sermonsNameList[1];
+    document.getElementById("SermonThreeTitle").innerHTML = sermonsNameList[2];
+
+    document.getElementById("SermonOneDate").innerHTML = sermonsDatesList[0];
+    document.getElementById("SermonTwoDate").innerHTML = sermonsDatesList[1];
+    document.getElementById("SermonThreeDate").innerHTML = sermonsDatesList[2];
+
+
+
+  </script>
     <section class="home-slider owl-carousel">
       
       <div class="slider-item" style="background-image: url('img/slider-1.jpg');">
         <div class="container">
           <div class="row slider-text align-items-center justify-content-center">
             <div class="col-md-8 text-center col-sm-12 element-animate">
-              <h1>Arise, Shine</h1>
-              <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus, soluta sit quam minima expedita atque corrupti reiciendis.</p>
+              <h1>Love of Jesus Indian Church</h1>
+              <p class="mb-5">Welcome to the LOJ Church, a center of spiritual growth and prosperity</p>
               <p><a href="#" class="btn btn-white btn-outline-white">Watch Now</a></p>
             </div>
           </div>
@@ -80,9 +120,9 @@
         <div class="container">
           <div class="row slider-text align-items-center justify-content-center">
             <div class="col-md-8 text-center col-sm-12 element-animate">
-              <h1>Explore Our Weekend Services</h1>
-              <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi unde impedit, necessitatibus, soluta sit quam minima expedita atque corrupti reiciendis.</p>
-              <p><a href="#" class="btn btn-white btn-outline-white">Explore Now</a></p>
+              <h1>Fellowship</h1>
+              <p class="mb-5">We have small groups attuned to each and every one of our congregation members! Be sure to check them out!</p>
+              <p><a href="ministries.html" class="btn btn-white btn-outline-white">Explore Now</a></p>
             </div>
           </div>
         </div>
@@ -127,7 +167,7 @@
           <ul class="worship-time-list mb-5">
             <li>
               <a>Sunday Worship
-              <span>5:30PM - 7:30AM</span>
+              <span>5:30PM - 7:30PM</span>
               </a>
             </li>
             <li>
@@ -152,15 +192,15 @@
         <div class="row mb-5 justify-content-center element-animate">
           <div class="col-md-12">
             <span class="section-heading">Recent Sermons</span>
-            <h2>Listen Our Sermons</h2>
+            <h2>Listen To Our Sermons</h2>
           </div>
         </div>
         <div class="row">
           <div class="col-12 col-sm-6 col-lg-4 mb-5">
             <div class="sermon element-animate">
               <div class="sermon-text">
-            <h2><a href="#">Arise, Shine</a></h2>
-            <p class="sermon-meta">by <a>Pastor Moses Pandian</a></p>
+            <h2><a id = "SermonOneTitle" href="#"></a></h2>
+            <p class="sermon-meta" id = "SermonOneDate"></p>
             </div>
             </div>
           </div>
@@ -169,13 +209,8 @@
             
             <div class="sermon element-animate">
               <div class="sermon-text">
-            <h2><a href="#">Filled in Him</a></h2>
-            <p class="sermon-meta">by <a>Pastor Moses Pandian</a></p>
-            </div>
-            <div class="player">
-                <audio id="player3" preload="none" controls style="max-width: 100%">
-                    <source src="http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3" type="audio/mp3">
-                </audio>
+            <h2><a id = "SermonTwoTitle" href="#"></a></h2>
+            <p class="sermon-meta" id = "SermonTwoDate"></p>
             </div>
             </div>
 
@@ -184,13 +219,8 @@
             
             <div class="sermon element-animate">
               <div class="sermon-text">
-            <h2><a href="#">Jehovah the Creator</a></h2>
-            <p class="sermon-meta">by <a href="#">Luis Matthew</a> on March 28, 2018</p>
-            </div>
-            <div class="player">
-                <audio id="player4" preload="none" controls style="max-width: 100%">
-                    <source src="http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3" type="audio/mp3">
-                </audio>
+            <h2><a id = "SermonThreeTitle" href="#"></a></h2>
+            <p class="sermon-meta" id = "SermonThreeDate"></p>
             </div>
             </div>
 
