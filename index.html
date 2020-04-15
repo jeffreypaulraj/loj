@@ -106,17 +106,17 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6 mb-3 element-animate">
-            <span class="section-heading">Upcoming Events</span>
-            <h2><a href="#">We must walk in the middle of the road.</a></h2>
+            <span class="section-heading">Sunday Service</span>
+            <h2><a href="#">150 Lake Avenue, Metuchen, NJ</a></h2>
             <div class="events-meta">
-              <script>
-                var now = new Date();
-                var nextSunday = now.getNextWeekDay(0);
-                document.getElementById('nextSundayText').innerHTML = nextSunday;
-              </script>
-              <span class="mr-2"><span class="ion-clock mr-2"></span id = "nextSundayText"></span>
+              <span class="mr-2"><span class="ion-clock mr-2" id = "nextSundayText"></span></span>
               <span class="mr-2"><span class="ion-location mr-2"></span>Metuchen, New Jersey</span>
               <span class="mr-2"><span class="ion-person mr-2"></span>Pastor Moses Pandian</span>
+              <script>
+                var today = new Date();
+                today.setDate(today.getDate() + (0 - 1 - today.getDay() + 7) % 7 + 1);
+                document.getElementById('nextSundayText').innerHTML = today;
+              </script>
             </div>
           </div>
           <div class="col-md-6 element-animate">
@@ -200,6 +200,68 @@
     </section>
 
     <!-- END section -->
+
+    <section class="section pt-5 pb-2">
+      <div class="container">
+        <div class="row mb-5 justify-content-center element-animate">
+          <div class="col-md-12">
+            <span class="section-heading">Weekly Agenda</span>
+            <h2>Sunday Service Duties</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-6 col-lg-4 mb-5">
+            <div class="sermon element-animate">
+              <div class="sermon-text">
+            <h2>Offertory Prayer</h2>
+            <p class="sermon-meta" id = "OffertoryPrayerField"></p>
+            </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6 col-lg-4 mb-5">
+            
+            <div class="sermon element-animate">
+              <div class="sermon-text">
+            <h2>Offertory Song</h2>
+            <p class="sermon-meta" id = "OffertorySongField"></p>
+            </div>
+            </div>
+
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4 mb-5">
+            
+            <div class="sermon element-animate">
+              <div class="sermon-text">
+            <h2>Bible Reading</h2>
+            <p class="sermon-meta" id = "BibleReadingField"></p>
+            </div>
+            </div>
+
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4 mb-5">
+            
+            <div class="sermon element-animate">
+              <div class="sermon-text">
+            <h2>Children's Offertory</h2>
+            <p class="sermon-meta" id = "ChildrenOffertoryField"></p>
+            </div>
+            </div>
+
+          </div>
+          <div class="col-12 col-sm-6 col-lg-4 mb-5">
+            
+            <div class="sermon element-animate">
+              <div class="sermon-text">
+            <h2>Ushers</h2>
+            <p class="sermon-meta" id = "UsherField"></p>
+            </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
     
     <section class="section">
       <div class="container">
@@ -325,6 +387,18 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
           document.getElementById("SermonTwoTitle").href = sermonsLinksList[1];
           document.getElementById("SermonThreeTitle").href = sermonsLinksList[2];
         })
+      })
+
+      firebase.database().ref('/SundayAgenda').once('value', function(snapshot){
+
+        var sundayData = snapshot.val();
+        document.getElementById("OffertoryPrayerField").innerHTML = sundayData['offertoryprayer'];
+        document.getElementById("OffertorySongField").innerHTML = sundayData['offertorysong'];
+        document.getElementById("BibleReadingField").innerHTML = sundayData['reading'];
+        document.getElementById("ChildrenOffertoryField").innerHTML = sundayData['scoffertory'];
+        document.getElementById("UsherField").innerHTML = sundayData['ushers'];
+
+
       })
   
     </script>

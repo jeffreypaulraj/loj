@@ -24,7 +24,7 @@
     <header role="banner">
       <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container">
-          <a class="navbar-brand" href="index.html">Advent</a>
+          <a class="navbar-brand" href="index.html">Love of Jesus Indian Church</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -41,18 +41,22 @@
                 <a class="nav-link dropdown-toggle" href="ministries.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ministries</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown04">
                   <a class="dropdown-item" href="ministries.html">Children</a>
-                  <a class="dropdown-item" href="ministries.html">Students</a>
-                  <a class="dropdown-item" href="ministries.html">Care Ministry</a>
-                  <a class="dropdown-item" href="ministries.html">Missions</a>
-                  <a class="dropdown-item" href="ministries.html">Request Prayer</a>
+                  <a class="dropdown-item" href="ministries.html">Youth</a>
+                  <a class="dropdown-item" href="jbq.html">Junior Bible Quiz</a>
+                  <a class="dropdown-item" href="ministries.html">Worship</a>
+                  <a class="dropdown-item" href="ministries.html">Outreach</a>
                 </div>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="events.html">Events</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="sermons.html">Sermons</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link active" href="contact.html">Contact</a>
               </li>
+              <li><a href="https://www.facebook.com/mosespandian/" class="nav-link"><span class="fa fa-facebook"></span></a></li>
             </ul>
             
           </div>
@@ -86,25 +90,31 @@
             <h2>Get In Touch</h2>
           </div>
         </div>
-
+        <script>
+            function sendMail(){
+              var body = document.getElementById("bodyField").innerHTML;
+              var subject = document.getElementById("subjectField").innerHTML;
+              window.open('mailto:test@example.com?subject=subject&body=body');
+            }
+        </script>
         <div class="row">
           <div class="col-md-12">
-          <form action="#" method="post">
+          <form action="javascript: sendMail();" method="post">
             
             <div class="row mb-4">
               <div class="col-md-4 mb-md-0 mb-4">
-                <input type="text" class="form-control" placeholder="Full Name">
+                <input type="text" class="form-control" placeholder="Full Name" id = "nameField">
               </div>
               <div class="col-md-4 mb-md-0 mb-4">
-                <input type="text" class="form-control" placeholder="Email Address">
+                <input type="text" class="form-control" placeholder="Email Address" id = "emailField">
               </div>
               <div class="col-md-4 mb-md-0 mb-4">
-                <input type="text" class="form-control" placeholder="Phone">
+                <input type="text" class="form-control" placeholder="Subject" id = "subjectField">
               </div>
             </div>
             <div class="row mb-4">
               <div class="col-md-12">
-                <textarea name="#" id="" class="form-control" placeholder="Write some words of encouragement" cols="30" rows="10"></textarea>
+                <textarea name="#" id="" class="form-control" id = "bodyField" placeholder="Express any of your questions, thoughts, and concerns!" cols="30" rows="10"></textarea>
               </div>
             </div>
             <div class="row">
