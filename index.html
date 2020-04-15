@@ -268,8 +268,8 @@
       <div class="container">
         <div class="row mb-5 justify-content-center element-animate">
           <div class="col-md-12">
-            <span class="section-heading">Ministries</span>
-            <h2>Events &amp; Ministries</h2>
+            <span class="section-heading"></span>
+            <h2>Events</h2>
           </div>
         </div>
         <div class="row">
@@ -277,9 +277,9 @@
             <div class="media custom-media">
               <img class="mr-3" width="30" src="img/img_1.jpg" alt="Generic placeholder image">
               <div class="media-body">
-                <h3 class="mt-0"><a href="#">Prayer &amp; Devotional for Children</a></h3>
-                <p class="post-meta">May 12, 2018, <a href="#">Children Ministries</a></p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed obcaecati, totam recusandae iure non nemo.</p>
+                <h3 class="mt-0" id = "EventOneTitle"></h3>
+                <p class="post-meta" id = EventOneDate> </p>
+                <p id = "EventOneVenue"></p>
               </div>
             </div>
           </div>
@@ -287,9 +287,9 @@
             <div class="media custom-media">
               <img class="mr-3" width="30" src="img/img_2.jpg" alt="Generic placeholder image">
               <div class="media-body">
-                <h3 class="mt-0"><a href="#">We Must Walk In The Middle of The Road</a></h3>
-                <p class="post-meta">May 12, 2018, <a href="#">Missions</a></p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed obcaecati, totam recusandae iure non nemo.</p>
+                <h3 class="mt-0" id = "EventTwoTitle"></h3>
+                <p class="post-meta" id = EventTwoDate> </p>
+                <p id = "EventTwoVenue"></p>
               </div>
             </div>
           </div>
@@ -297,9 +297,9 @@
             <div class="media custom-media">
               <img class="mr-3" width="30" src="img/img_3.jpg" alt="Generic placeholder image">
               <div class="media-body">
-                <h3 class="mt-0"><a href="#">Tracts Giving</a></h3>
-                <p class="post-meta">May 12, 2018, <a href="#">Care Ministry</a></p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed obcaecati, totam recusandae iure non nemo.</p>
+                <h3 class="mt-0" id = "EventThreeTitle"></h3>
+                <p class="post-meta" id = EventThreeDate> </p>
+                <p id = "EventThreeVenue"></p>
               </div>
             </div>
           </div>
@@ -398,7 +398,29 @@
         document.getElementById("LiveStreamButton").href = sundayData['livestream'];
       })
 
+      var eventTitlesList = [];
+      var eventDatesList = [];
+      var eventVenuesList = [];
+      firebase.database().ref('/Events').once('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot){
+          var eventKey = childSnapshot.key;
+          var eventData = childSnapshot.val();
+          eventTitlesList.push(eventData['Title']);
+          eventDatesList.push(eventData['Date']);
+          eventVenuesList.push(eventData['Link']);
+          document.getElementById("EventOneTitle").innerHTML = eventTitlesList[0];
+          document.getElementById("EventTwoTitle").innerHTML = eventTitlesList[1];
+          document.getElementById("EventThreeTitle").innerHTML = eventTitlesList[2];
+  
+          document.getElementById("EventOneDate").innerHTML = eventDatesList[0];
+          document.getElementById("EventTwoDate").innerHTML = eventDatesList[1];
+          document.getElementById("EventThreeDate").innerHTML = eventDatesList[2];
 
+          document.getElementById("EventOneVenue").innerHTML = eventVenuesList[0];
+          document.getElementById("EventTwoVenue").innerHTML = eventVenuesList[1];
+          document.getElementById("EventThreeVenue").innerHTML = eventVenuesList[1];
+        })
+      })
   
     </script>
 
